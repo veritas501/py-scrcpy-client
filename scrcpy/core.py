@@ -263,7 +263,7 @@ class Client:
         return [{"codec": codec, "encoder": encoder} for codec, encoder in matches]
 
     @need_server
-    def list_apps(self):
+    def list_apps(self) -> Dict[Text, Text]:
         """list apps"""
         commands = [
             f"CLASSPATH={self.remote_server_path}",
@@ -328,6 +328,10 @@ class Client:
                 self.__video_socket.close()
             except Exception:
                 pass
+
+    def snapshot(self):
+        """take device screen snapshot"""
+        return self.last_frame
 
     def __stream_loop(self) -> None:
         """
