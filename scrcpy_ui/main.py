@@ -37,9 +37,8 @@ class MainWindow(QMainWindow):
         self.client = scrcpy.Client(
             device=self.device,
             flip=self.ui.flip.isChecked(),
-            bitrate=1000000000,
             encoder_name=encoder_name,
-            max_fps=60,
+            # max_fps=60,
         )
         self.client.add_listener(scrcpy.EVENT_INIT, self.on_init)
         self.client.add_listener(scrcpy.EVENT_FRAME, self.on_frame)
@@ -148,6 +147,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle(f"Serial: {self.client.device_name}")
 
     def on_frame(self, frame):
+        # print(type(frame))
         app.processEvents()
         if frame is not None:
             ratio = self.max_width / max(self.client.resolution)
