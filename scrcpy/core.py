@@ -194,7 +194,8 @@ class Client:
 
     def push_server(self, remote_path="/data/local/tmp") -> str:
         remote_filename = (Path(remote_path) / SCRCPY_SERVER_FILENAME).as_posix()
-        self.device.sync.push(SCRCPY_SERVER_FILEPATH, remote_filename)
+        if not self.device.sync.exists(remote_filename):
+            self.device.sync.push(SCRCPY_SERVER_FILEPATH, remote_filename)
         self.remote_server_path = remote_filename
         return remote_filename
 
@@ -290,7 +291,7 @@ class Client:
             daemon_threaded: Run stream loop in a daemon thread to avoid blocking
         """
         assert self.alive is False
-
+        print("self.start_app",self.start_app)
         self.start_server()
         self.__init_server_connection()
         self.alive = True
