@@ -220,6 +220,7 @@ class Client:
             "power_off_on_close=false",
             "clipboard_autosync=false",
             "cleanup=false",
+            "screen_off_timeout=2147483000",
         ]
 
         if self.max_width:
