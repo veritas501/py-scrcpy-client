@@ -291,7 +291,6 @@ class Client:
             daemon_threaded: Run stream loop in a daemon thread to avoid blocking
         """
         assert self.alive is False
-        print("self.start_app",self.start_app)
         self.start_server()
         self.__init_server_connection()
         self.alive = True
