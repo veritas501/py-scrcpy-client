@@ -277,8 +277,8 @@ class Client:
             "cleanup=false",
         ]
         res = self.device.shell(commands)
-        pattern = r"\s+[-*]\s+(.*?)\s+(([a-z_][a-z0-9_]*)(\.[a-z_][a-z0-9_]*)*)"
-        matches = re.findall(pattern, res)
+        pattern = r"\s+[-*]\s+(.*?)\s+(([a-z_][a-z0-9_]*)(\.[a-z_][a-z0-9_]*)*)$"
+        matches = re.findall(pattern, res, re.MULTILINE)
         return {m[1]: m[0] for m in matches}
 
     @need_server
