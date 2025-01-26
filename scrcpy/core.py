@@ -134,7 +134,11 @@ class Client:
 
         # Connect to device
         if device is None:
-            device = adb.device_list()[0]
+            devices = adb.device_list()
+            if len(devices):
+                device = devices[0]
+            else:
+                device = None
         elif isinstance(device, str):
             device = adb.device(serial=device)
 
